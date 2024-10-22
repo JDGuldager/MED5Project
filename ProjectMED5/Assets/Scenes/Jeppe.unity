@@ -756,11 +756,11 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 1732536870}
   otherFoot: {fileID: 1481878346}
-  speed: 4
+  speed: 3
   stepDistance: 0.2
   stepLength: 0.2
-  sideStepLength: 0.1
-  stepHeight: 0.3
+  sideStepLength: 0.12
+  stepHeight: 0.4
   footOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: -120, y: 180, z: 0}
   footYPosOffset: 0.1
@@ -2261,8 +2261,8 @@ Transform:
   m_GameObject: {fileID: 1342013056}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 2.5, z: 5}
-  m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.25, z: 5}
+  m_LocalScale: {x: -0.5, y: 1, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 129512608}
@@ -2333,11 +2333,11 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 1732536870}
   otherFoot: {fileID: 202758032}
-  speed: 4
+  speed: 3
   stepDistance: 0.2
   stepLength: 0.2
-  sideStepLength: 0.1
-  stepHeight: 0.3
+  sideStepLength: 0.12
+  stepHeight: 0.4
   footOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: -120, y: 180, z: 0}
   footYPosOffset: 0.1
