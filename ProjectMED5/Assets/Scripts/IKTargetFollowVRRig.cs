@@ -53,8 +53,12 @@ public class IKTargetFollowVRRig : MonoBehaviour
     // It's used here to ensure the VR rig's IK targets follow the VR devices smoothly.
     void LateUpdate()
     {
-        // Set the body's position based on the head's IK target position, plus an additional offset.
-        transform.position = head.ikTarget.position + headBodyPositionOffset;
+        // Preserve the current y-position of the body.
+        Vector3 newPosition = head.ikTarget.position + headBodyPositionOffset;
+        newPosition.y = transform.position.y;  // Lock y-axis movement
+
+        // Set the body's position based on the new x and z values while keeping the y constant.
+        transform.position = newPosition;
 
         // Get the yaw (rotation around the vertical axis) of the VR headset.
         float yaw = head.vrTarget.eulerAngles.y;
@@ -75,4 +79,5 @@ public class IKTargetFollowVRRig : MonoBehaviour
         // Map the right-hand VR controller position/rotation to the corresponding IK target.
         rightHand.Map();
     }
+
 }
