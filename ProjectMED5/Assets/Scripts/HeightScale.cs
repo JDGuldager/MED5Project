@@ -8,6 +8,7 @@ public class HeightScale : MonoBehaviour
     public float userHeight = 174;
     public float characterHeight = 174;
     public float newScale;
+    public TMPro.TextMeshProUGUI userHeightText;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,6 @@ public class HeightScale : MonoBehaviour
         newScale = userHeight / characterHeight;
         Vector3 scaleFactor = new Vector3(newScale, newScale, newScale);
         transform.localScale = scaleFactor;
+        userHeightText.text = "User Height: " + userHeight;
     }
 }
