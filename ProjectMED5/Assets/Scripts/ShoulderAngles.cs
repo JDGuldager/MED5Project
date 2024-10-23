@@ -6,8 +6,8 @@ public class ShoulderAngles : MonoBehaviour
 {
     public Transform leftShoulder; // Set this to the left shoulder or body center for the left arm
     public Transform rightShoulder; // Set this to the right shoulder or body center for the right arm
-    public Transform leftHand; // Set this to the left hand (VR controller or hand position)
-    public Transform rightHand; // Set this to the right hand (VR controller or hand position)
+    public Transform leftHand; // Set this to the left hand 
+    public Transform rightHand; // Set this to the right hand 
 
     public TMPro.TextMeshProUGUI leftArmAngleText; // UI text for left arm angle
     public TMPro.TextMeshProUGUI rightArmAngleText; // UI text for right arm angle
