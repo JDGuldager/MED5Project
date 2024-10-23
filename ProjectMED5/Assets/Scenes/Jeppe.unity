@@ -3374,13 +3374,13 @@ MonoBehaviour:
   rightHand: {fileID: 685072309}
   leftArmAngleText: {fileID: 1293017052}
   rightArmAngleText: {fileID: 2024899788}
-  leftShoulderOffset: {x: -0.1, y: 0, z: 0}
-  rightShoulderOffset: {x: 0.1, y: 0, z: 0}
-  calibrationOffset: 20
+  leftShoulderOffset: {x: -0.15, y: 0, z: 0.15}
+  rightShoulderOffset: {x: 0.15, y: 0, z: 0.15}
+  calibrationOffset: 0
   angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
-  specificAngleSound: {fileID: 8300000, guid: c4e372c5e8ccd4945bfbc5ebb6dfd2e4, type: 3}
+  specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
   specificAngleTolerance: 2
-  specificAngleThreshold: 60
+  specificAngleThreshold: 90
   stereoAudioSource: {fileID: 1732536876}
   leftEarAudioSource: {fileID: 909140778}
   rightEarAudioSource: {fileID: 1070498452}
