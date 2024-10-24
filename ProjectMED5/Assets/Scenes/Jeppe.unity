@@ -3376,7 +3376,7 @@ MonoBehaviour:
   rightArmAngleText: {fileID: 2024899788}
   leftShoulderOffset: {x: -0.15, y: 0, z: 0.15}
   rightShoulderOffset: {x: 0.15, y: 0, z: 0.15}
-  calibrationOffset: 0
+  calibrationOffset: -4
   angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
   specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
   specificAngleTolerance: 2
