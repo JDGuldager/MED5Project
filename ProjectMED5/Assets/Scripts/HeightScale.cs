@@ -23,4 +23,12 @@ public class HeightScale : MonoBehaviour
         transform.localScale = scaleFactor;
         userHeightText.text = "User Height: " + userHeight;
     }
+    public void HeightUp()
+    {
+        userHeight++;
+    }
+    public void HeightDown()
+    {
+        userHeight--;
+    }
 }
