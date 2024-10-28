@@ -5,7 +5,7 @@ using UnityEngine;
 public class ForearmRotationExercise : MonoBehaviour
 {
     public enum ArmSelection { Both, Left, Right }
-    public ArmSelection selectedArm = ArmSelection.Both;
+    public ArmSelection selectedArm = ArmSelection.Both; // Default is both
 
     public Transform leftElbow; // Reference to the left elbow
     public Transform rightElbow; // Reference to the right elbow
@@ -48,7 +48,7 @@ public class ForearmRotationExercise : MonoBehaviour
 
     void Update()
     {
-        // Only update if exercise is active
+        // Only update text if exercise is active
         if (!isActivated)
         {
             leftForearmAngleText.gameObject.SetActive(false);
