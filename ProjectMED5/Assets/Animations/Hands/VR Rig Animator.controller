@@ -189,7 +189,7 @@ BlendTree:
     m_DirectBlendParameter: Left Pinch
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 09156f64d2418a047a9abb632adf6b8c, type: 2}
+    m_Motion: {fileID: 6886032399960979746, guid: d058afc17037bde4088954e4ac531939, type: 3}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
