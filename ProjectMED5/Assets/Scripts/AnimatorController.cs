@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class AnimatorController : MonoBehaviour
 
     public void Exer2()
     {
-        animator.SetBool("Exer1", false);
+        animator.SetBool("Exer2", true);
     }
 
 

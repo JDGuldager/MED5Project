@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class CharacterDialogue : MonoBehaviour
 {
-    // Public float to control the delay before the character speaks
+    // Public float to control the delay before the character speaks at the start
     public float dialogueDelay = 3f;
 
-    // Audio clip that the character will play
-    public AudioClip dialogueClip;
+    // Audio clip to play at the beginning of the game
+    public AudioClip startupDialogueClip;
 
     // Reference to the AudioSource component
     private AudioSource audioSource;
@@ -17,37 +17,57 @@ public class CharacterDialogue : MonoBehaviour
         // Get the AudioSource component (make sure it’s attached to the same GameObject)
         audioSource = GetComponent<AudioSource>();
 
-        // Check if AudioSource and AudioClip are set
+        // Check if AudioSource is set
         if (audioSource == null)
         {
             Debug.LogError("No AudioSource found! Please attach an AudioSource component.");
             return;
         }
 
-        if (dialogueClip == null)
+        // Play the startup dialogue after a delay if a clip is assigned
+        if (startupDialogueClip != null)
         {
-            Debug.LogError("No audio clip assigned! Please assign an audio clip.");
-            return;
+            StartCoroutine(StartDialogueAfterDelay(startupDialogueClip));
         }
-
-        // Start the coroutine to trigger dialogue after a delay
-        StartCoroutine(StartDialogueAfterDelay());
     }
 
-    // Coroutine to wait and then play the audio
-    private IEnumerator StartDialogueAfterDelay()
+    // Coroutine to wait and then play the audio with a delay
+    private IEnumerator StartDialogueAfterDelay(AudioClip clip)
     {
         // Wait for the specified number of seconds
         yield return new WaitForSeconds(dialogueDelay);
 
-        // Play the dialogue audio
-        TriggerDialogue();
+        // Play the dialogue audio if a clip was provided
+        PlayDialogue(clip);
     }
 
-    // Method to handle the dialogue action
-    private void TriggerDialogue()
+    // Public method to play the specified audio clip on demand (for OnClick events)
+    public void PlayDialogue(AudioClip clip)
     {
-        // Play the assigned audio clip
-        audioSource.PlayOneShot(dialogueClip);
+        // Check if an audio clip is provided
+        if (clip == null)
+        {
+            Debug.LogWarning("No audio clip provided! Please assign an audio clip.");
+            return;
+        }
+
+        // Stop any currently playing audio
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        // Play the provided audio clip
+        audioSource.PlayOneShot(clip);
+    }
+
+    // Public method to stop the audio on demand (for OnClick events)
+    public void StopDialogue()
+    {
+        // Stop the audio if it's playing
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }

@@ -64,14 +64,12 @@ public class ForearmRotationExercise : MonoBehaviour
         if (selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both)
         {
             float leftForearmAngle = CalculateForearmFanAngle(leftElbow, leftHand);
-            Debug.Log("Left Forearm Angle: " + leftForearmAngle); // Debug log
             UpdateUIAndPlaySound(leftForearmAngle, ref lastLeftAngle, true);
         }
 
         if (selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both)
         {
             float rightForearmAngle = CalculateForearmFanAngle(rightElbow, rightHand);
-            Debug.Log("Right Forearm Angle: " + rightForearmAngle); // Debug log
             UpdateUIAndPlaySound(rightForearmAngle, ref lastRightAngle, false);
         }
     }
@@ -84,9 +82,6 @@ public class ForearmRotationExercise : MonoBehaviour
 
         // Project the vector onto the horizontal plane by zeroing the y-component
         elbowToHand.y = 0;
-
-        // Log the vector for debugging
-        Debug.Log("Elbow to Hand: " + elbowToHand);
 
         // Calculate the angle relative to the forward direction (0 degrees)
         float angle;
