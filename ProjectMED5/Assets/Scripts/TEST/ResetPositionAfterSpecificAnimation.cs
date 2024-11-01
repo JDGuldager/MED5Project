@@ -11,6 +11,8 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private bool animationEnded = false;
+    public ShoulderAngles shoulderAngles;
+    public ForearmRotationExercise ForearmRotationExercise;
 
     void Start()
     {
@@ -38,11 +40,13 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
                 if (!string.IsNullOrEmpty(boolExercise1))
                 {
                     animator.SetBool(boolExercise1, false);
+                    shoulderAngles.ToggleActivation();
                 }
 
                 if (!string.IsNullOrEmpty(boolExercise2))
                 {
                     animator.SetBool(boolExercise2, false);
+                    ForearmRotationExercise.ToggleActivation();
                 }
 
                 // Set the trigger to indicate the animation is finished

@@ -1212,7 +1212,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 803843739}
+      - m_Target: {fileID: 755604173}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -3038,18 +3038,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1732536875}
-        m_TargetAssemblyTypeName: ShoulderAngles, Assembly-CSharp
-        m_MethodName: ToggleActivation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 755604173}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -5945,18 +5933,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1732536877}
-        m_TargetAssemblyTypeName: ForearmRotationExercise, Assembly-CSharp
-        m_MethodName: ToggleActivation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 755604173}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -6526,6 +6502,8 @@ MonoBehaviour:
   boolExercise1: Exer1
   boolExercise2: Exer2
   finishTriggerName: AnimationFinished
+  shoulderAngles: {fileID: 1732536875}
+  ForearmRotationExercise: {fileID: 1732536877}
 --- !u!1 &1186432656
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7221,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 803843739}
+      - m_Target: {fileID: 755604173}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -8756,7 +8734,8 @@ MonoBehaviour:
   calibrationOffset: 0
   angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
   specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
-  specificAngleTolerance: 3
+  anglesoundThreshold: 5
+  specificAngleTolerance: 4
   specificAngleThreshold: 90
   stereoAudioSource: {fileID: 1732536876}
   leftEarAudioSource: {fileID: 909140778}
@@ -8878,8 +8857,9 @@ MonoBehaviour:
   rightForearmAngleText: {fileID: 1989881101}
   angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
   specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
-  specificAngleTolerance: 3
-  specificAngleThreshold: 90
+  specificAngleTolerance: 4
+  anglesoundThreshold: 5
+  specificAngleThreshold: 60
   stereoAudioSource: {fileID: 1732536876}
   leftEarAudioSource: {fileID: 909140778}
   rightEarAudioSource: {fileID: 1070498452}

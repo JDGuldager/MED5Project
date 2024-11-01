@@ -18,6 +18,7 @@ public class ForearmRotationExercise : MonoBehaviour
     public AudioClip angleSound; // Sound for every 2 degrees
     public AudioClip specificAngleSound; // Sound at a specific angle
     public float specificAngleTolerance = 5f; // Tolerance range for specific angle sound
+    public float anglesoundThreshold = 5f;
     public float specificAngleThreshold = 45f; // Target angle for specific sound
 
     public AudioSource stereoAudioSource; // Audio source for both ears
@@ -124,7 +125,7 @@ public class ForearmRotationExercise : MonoBehaviour
         }
 
         // Play sound every 2 degrees
-        if (Mathf.Abs(currentAngle - lastAngle) >= 2f)
+        if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
             if (isLeftArm) leftEarAudioSource.PlayOneShot(angleSound);
             else rightEarAudioSource.PlayOneShot(angleSound);

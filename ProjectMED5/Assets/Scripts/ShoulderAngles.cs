@@ -27,6 +27,7 @@ public class ShoulderAngles : MonoBehaviour
     // Audio clips for angle sound and specific angle threshold sound
     public AudioClip angleSound;
     public AudioClip specificAngleSound;
+    public float anglesoundThreshold = 5f;
     public float specificAngleTolerance; // Tolerance range for triggering specific angle sound
     public float specificAngleThreshold = 90f; // Angle at which specific sound should play
 
@@ -143,7 +144,7 @@ public class ShoulderAngles : MonoBehaviour
         }
 
         // Check if angle has changed by 2 degrees to play sound
-        if (Mathf.Abs(currentAngle - lastAngle) >= 2f)
+        if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
             // Play the angle sound in left or right ear based on which arm is moving
             if (isLeftArm) leftEarAudioSource.PlayOneShot(angleSound);
