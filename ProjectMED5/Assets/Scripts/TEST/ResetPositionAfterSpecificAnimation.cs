@@ -8,9 +8,11 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
     public string boolExercise1;            // Name of the first bool parameter to set to false
     public string boolExercise2;            // Name of the second bool parameter to set to false
     public string finishTriggerName = "AnimationFinished"; // Trigger to set when animation finishes
+
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private bool animationEnded = false;
+
     public ShoulderAngles shoulderAngles;
     public ForearmRotationExercise ForearmRotationExercise;
 
@@ -26,23 +28,32 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
         // Get the current state information for the base layer (layer 0)
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        // Check if either the first or second animation is playing and has finished
-        if ((stateInfo.IsName(firstAnimationName) || stateInfo.IsName(secondAnimationName)) &&
-            stateInfo.normalizedTime >= 1f && !animator.IsInTransition(0))
+        // Check if the first or second animation is playing and has finished
+        if (stateInfo.normalizedTime >= 1f && !animator.IsInTransition(0))
         {
-            // If either animation is complete and hasn't reset already
-            if (!animationEnded)
+            // Check if the first animation has finished
+            if (stateInfo.IsName(firstAnimationName) && !animationEnded)
             {
                 ResetPosition();
                 animationEnded = true;
 
-                // Set the specified bool parameters in the Animator to false
+                // Set the bool parameter for the first exercise to false and trigger shoulder activation
                 if (!string.IsNullOrEmpty(boolExercise1))
                 {
                     animator.SetBool(boolExercise1, false);
                     shoulderAngles.ToggleActivation();
                 }
 
+                // Set the trigger to indicate the animation is finished
+                animator.SetTrigger(finishTriggerName);
+            }
+            // Check if the second animation has finished
+            else if (stateInfo.IsName(secondAnimationName) && !animationEnded)
+            {
+                ResetPosition();
+                animationEnded = true;
+
+                // Set the bool parameter for the second exercise to false and trigger forearm rotation activation
                 if (!string.IsNullOrEmpty(boolExercise2))
                 {
                     animator.SetBool(boolExercise2, false);
