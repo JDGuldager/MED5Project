@@ -143,7 +143,7 @@ public class ShoulderAngles : MonoBehaviour
                 : defaultRightTextColor;
         }
 
-        // Check if angle has changed by 2 degrees to play sound
+        // Check if angle has changed by x degrees to play sound
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
             // Play the angle sound in left or right ear based on which arm is moving
