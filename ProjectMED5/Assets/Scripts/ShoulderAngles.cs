@@ -27,14 +27,14 @@ public class ShoulderAngles : MonoBehaviour
     // Audio clips for angle sound and specific angle threshold sound
     public AudioClip angleSound;
     public AudioClip specificAngleSound;
-    public float anglesoundThreshold = 5f;
-    public float specificAngleTolerance; // Tolerance range for triggering specific angle sound
-    public float specificAngleThreshold = 90f; // Angle at which specific sound should play
+    public float anglesoundThreshold = 5f;             // Degrees to trigger the regular angle sound
+    public float specificAngleTolerance;               // Tolerance range for triggering specific angle sound
+    public float specificAngleThreshold = 90f;         // Angle at which specific sound should play
 
     // Audio sources for stereo and separate ear playback
-    public AudioSource stereoAudioSource; // For both ears
-    public AudioSource leftEarAudioSource; // For left ear
-    public AudioSource rightEarAudioSource; // For right ear
+    public AudioSource stereoAudioSource;              // For both ears
+    public AudioSource leftEarAudioSource;             // For left ear
+    public AudioSource rightEarAudioSource;            // For right ear
 
     // Tracking the last angles for each arm
     private float lastLeftAngle = 0f;
@@ -43,6 +43,10 @@ public class ShoulderAngles : MonoBehaviour
     // Flags to prevent specific angle sound from playing repeatedly
     private bool hasPlayedSpecificSoundLeft = false;
     private bool hasPlayedSpecificSoundRight = false;
+
+    // Flags to track if the arm has previously been below the specific angle threshold
+    private bool wasBelowThresholdLeft = false;
+    private bool wasBelowThresholdRight = false;
 
     // Default colors for UI text to reset after angle is reached
     private Color defaultLeftTextColor;
@@ -57,20 +61,20 @@ public class ShoulderAngles : MonoBehaviour
         defaultLeftTextColor = leftArmAngleText.color;
         defaultRightTextColor = rightArmAngleText.color;
 
-        // Set up audio sources for 3D sound playback
+        // Set up audio sources for 3D sound playback on each side
         leftEarAudioSource.clip = angleSound;
         leftEarAudioSource.spatialBlend = 1.0f; // Full 3D sound
         rightEarAudioSource.clip = angleSound;
         rightEarAudioSource.spatialBlend = 1.0f; // Full 3D sound
 
-        // Hide UI text initially
+        // Initially hide the UI text for arm angles
         leftArmAngleText.gameObject.SetActive(false);
         rightArmAngleText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        // Check if tracking is active; if not, exit early
+        // Check if tracking is active; if not, hide text and return early
         if (!isActivated)
         {
             leftArmAngleText.gameObject.SetActive(false);
@@ -78,28 +82,26 @@ public class ShoulderAngles : MonoBehaviour
             return;
         }
 
-        // Only show relevant arm text based on the selected arm for training
+        // Show only the relevant arm text based on the selected arm for training
         leftArmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both);
         rightArmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both);
 
-        // Process the left arm if selected for training
+        // Process left arm if selected
         if (selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both)
         {
-            // Calculate the left arm angle and update UI and sounds
             float leftArmAngle = CalculateArmElevation(leftShoulder, leftHand, leftShoulderOffset);
             UpdateUIAndPlaySound(leftArmAngle, ref lastLeftAngle, true);
         }
 
-        // Process the right arm if selected for training
+        // Process right arm if selected
         if (selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both)
         {
-            // Calculate the right arm angle and update UI and sounds
             float rightArmAngle = CalculateArmElevation(rightShoulder, rightHand, rightShoulderOffset);
             UpdateUIAndPlaySound(rightArmAngle, ref lastRightAngle, false);
         }
     }
 
-    // Calculate the angle of arm elevation based on shoulder and hand position
+    // Calculates the angle of arm elevation based on shoulder and hand positions
     float CalculateArmElevation(Transform shoulder, Transform hand, Vector3 shoulderOffset)
     {
         // Adjust shoulder position with offset if needed
@@ -108,80 +110,89 @@ public class ShoulderAngles : MonoBehaviour
         // Create a vector from shoulder to hand
         Vector3 shoulderToHand = hand.position - adjustedShoulderPosition;
 
-        // Downward vector (representing 0° baseline)
+        // Downward vector representing a 0° baseline
         Vector3 down = -Vector3.up;
 
         // Calculate the angle between the downward vector and shoulder-to-hand vector
         float angle = Vector3.Angle(down, shoulderToHand);
 
-        // Apply calibration offset and clamp to 0-180°
+        // Apply calibration offset and clamp result to 0-180°
         return Mathf.Clamp(angle - calibrationOffset, 0, 180);
     }
 
-    // Update UI text and play sounds based on current arm angle
+    // Updates the UI text and plays sounds based on the current arm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
-        // Update UI text and color based on angle threshold
-        if (isLeftArm)
-        {
-            // Display left arm angle in text UI
-            leftArmAngleText.text = "Left Arm Elevation: " + currentAngle.ToString("F0") + "°";
-
-            // Set text color to green if angle is within specific range; otherwise, reset to default
-            leftArmAngleText.color = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
-                ? Color.green
-                : defaultLeftTextColor;
-        }
-        else
-        {
-            // Display right arm angle in text UI
-            rightArmAngleText.text = "Right Arm Elevation: " + currentAngle.ToString("F0") + "°";
-
-            // Set text color to green if angle is within specific range; otherwise, reset to default
-            rightArmAngleText.color = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
-                ? Color.green
-                : defaultRightTextColor;
-        }
-
-        // Check if angle has changed by x degrees to play sound
+        // Only update text and play sound if the angle has changed by the threshold amount
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
-            // Play the angle sound in left or right ear based on which arm is moving
+            // Update the UI text and color based on the thresholds
+            if (isLeftArm)
+            {
+                // Update left arm angle text and color
+                leftArmAngleText.text = "Left Arm Elevation: " + currentAngle.ToString("F0") + "°";
+                leftArmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                    ? Color.red  // Above threshold + tolerance
+                    : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
+                        ? Color.green  // Within threshold ± tolerance
+                        : defaultLeftTextColor;  // Below threshold
+            }
+            else
+            {
+                // Update right arm angle text and color
+                rightArmAngleText.text = "Right Arm Elevation: " + currentAngle.ToString("F0") + "°";
+                rightArmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                    ? Color.red  // Above threshold + tolerance
+                    : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
+                        ? Color.green  // Within threshold ± tolerance
+                        : defaultRightTextColor;  // Below threshold
+            }
+
+            // Play the angle sound if angle change meets the threshold
             if (isLeftArm) leftEarAudioSource.PlayOneShot(angleSound);
             else rightEarAudioSource.PlayOneShot(angleSound);
 
-            // Update last angle to current
+            // Update last angle to current for next threshold check
             lastAngle = currentAngle;
         }
 
-        // Check if the arm is within the specific angle threshold
+        // Check if the arm is within the specific angle range and play specific sound if entering from below
         bool isWithinSpecificAngle = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance;
 
-        // Play the specific angle sound if angle is within threshold and hasn't played yet
+        // Play the specific angle sound only if the arm has entered the range from below
         if (isWithinSpecificAngle)
         {
-            if (isLeftArm && !hasPlayedSpecificSoundLeft)
+            if (isLeftArm && !hasPlayedSpecificSoundLeft && wasBelowThresholdLeft)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
-                hasPlayedSpecificSoundLeft = true;
+                hasPlayedSpecificSoundLeft = true;  // Prevent repeated plays
             }
-            else if (!isLeftArm && !hasPlayedSpecificSoundRight)
+            else if (!isLeftArm && !hasPlayedSpecificSoundRight && wasBelowThresholdRight)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
-                hasPlayedSpecificSoundRight = true;
+                hasPlayedSpecificSoundRight = true;  // Prevent repeated plays
             }
         }
         else
         {
-            // Reset the flags when moving out of the specific angle range
-            if (isLeftArm) hasPlayedSpecificSoundLeft = false;
-            else hasPlayedSpecificSoundRight = false;
+            // Reset flags and update threshold tracking based on current position
+            if (isLeftArm)
+            {
+                hasPlayedSpecificSoundLeft = false;
+                wasBelowThresholdLeft = currentAngle < specificAngleThreshold - specificAngleTolerance;
+            }
+            else
+            {
+                hasPlayedSpecificSoundRight = false;
+                wasBelowThresholdRight = currentAngle < specificAngleThreshold - specificAngleTolerance;
+            }
         }
     }
 
-    // Method to toggle activation of the script
+
+    // Toggles the activation of the angle tracking
     public void ToggleActivation() => isActivated = !isActivated;
 
-    // Method to set the selected arm based on button click (0 = Both, 1 = Left, 2 = Right)
+    // Sets the selected arm based on a button click (0 = Both, 1 = Left, 2 = Right)
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
 }
