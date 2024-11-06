@@ -4,52 +4,65 @@ using UnityEngine;
 
 public class ForearmRotationExercise : MonoBehaviour
 {
+    // Enum to select which arm(s) to train
     public enum ArmSelection { Both, Left, Right }
-    public ArmSelection selectedArm = ArmSelection.Both; // Default is both
+    public ArmSelection selectedArm = ArmSelection.Both; // Default to training both arms
 
-    public Transform leftElbow; // Reference to the left elbow
-    public Transform rightElbow; // Reference to the right elbow
-    public Transform leftHand; // Reference to the left hand
-    public Transform rightHand; // Reference to the right hand
+    // Transform references for elbow and hand positions
+    public Transform leftElbow;
+    public Transform rightElbow;
+    public Transform leftHand;
+    public Transform rightHand;
 
-    public TMPro.TextMeshProUGUI leftForearmAngleText; // UI text for left forearm angle
-    public TMPro.TextMeshProUGUI rightForearmAngleText; // UI text for right forearm angle
+    // UI text elements to display forearm rotation angles
+    public TMPro.TextMeshProUGUI leftForearmAngleText;
+    public TMPro.TextMeshProUGUI rightForearmAngleText;
 
-    public AudioClip angleSound; // Sound for every 2 degrees
-    public AudioClip specificAngleSound; // Sound at a specific angle
-    public float specificAngleTolerance = 5f; // Tolerance range for specific angle sound
-    public float anglesoundThreshold = 5f;
-    public float specificAngleThreshold = 45f; // Target angle for specific sound
+    // Audio clips for regular angle sound and specific angle sound
+    public AudioClip angleSound;
+    public AudioClip specificAngleSound;
+    public float specificAngleTolerance = 5f; // Range around target angle for specific sound
+    public float anglesoundThreshold = 5f;    // Angle change threshold to play regular sound
+    public float specificAngleThreshold = 45f; // Target angle for specific angle sound
 
-    public AudioSource stereoAudioSource; // Audio source for both ears
-    public AudioSource leftEarAudioSource; // Audio source for left ear
-    public AudioSource rightEarAudioSource; // Audio source for right ear
+    // Audio sources for stereo and ear-specific playback
+    public AudioSource stereoAudioSource;
+    public AudioSource leftEarAudioSource;
+    public AudioSource rightEarAudioSource;
 
-    private float lastLeftAngle = 0f; // Last angle for left forearm
-    private float lastRightAngle = 0f; // Last angle for right forearm
+    // Track the last known angles to detect significant angle changes
+    private float lastLeftAngle = 0f;
+    private float lastRightAngle = 0f;
 
-    private bool hasPlayedSpecificSoundLeft = false; // Flag to check if specific sound has been played for left arm
-    private bool hasPlayedSpecificSoundRight = false; // Flag to check if specific sound has been played for right arm
+    // Flags to ensure specific angle sound is only played once per range entry
+    private bool hasPlayedSpecificSoundLeft = false;
+    private bool hasPlayedSpecificSoundRight = false;
 
-    private Color defaultLeftTextColor; // Default color for left arm text
-    private Color defaultRightTextColor; // Default color for right arm text
+    // Flags to track if the angle was below the specific threshold range
+    private bool wasBelowThresholdLeft = true;
+    private bool wasBelowThresholdRight = true;
 
-    private bool isActivated = false; // Exercise activation toggle
+    // Default colors for UI text, used for resetting after angle changes
+    private Color defaultLeftTextColor;
+    private Color defaultRightTextColor;
+
+    // Activation flag for toggling exercise tracking
+    private bool isActivated = false;
 
     void Start()
     {
-        // Store default text colors for reset
+        // Store default text colors to reset them later
         defaultLeftTextColor = leftForearmAngleText.color;
         defaultRightTextColor = rightForearmAngleText.color;
 
-        // Hide UI text initially
+        // Hide UI text at the beginning until exercise is activated
         leftForearmAngleText.gameObject.SetActive(false);
         rightForearmAngleText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        // Only update text if exercise is active
+        // If exercise is not activated, hide the text and skip further processing
         if (!isActivated)
         {
             leftForearmAngleText.gameObject.SetActive(false);
@@ -57,17 +70,18 @@ public class ForearmRotationExercise : MonoBehaviour
             return;
         }
 
-        // Set UI visibility based on selected arm
+        // Show or hide UI text based on selected arm for training
         leftForearmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both);
         rightForearmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both);
 
-        // Calculate and display angles if relevant
+        // Process left arm if selected
         if (selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both)
         {
             float leftForearmAngle = CalculateForearmFanAngle(leftElbow, leftHand);
             UpdateUIAndPlaySound(leftForearmAngle, ref lastLeftAngle, true);
         }
 
+        // Process right arm if selected
         if (selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both)
         {
             float rightForearmAngle = CalculateForearmFanAngle(rightElbow, rightHand);
@@ -75,75 +89,81 @@ public class ForearmRotationExercise : MonoBehaviour
         }
     }
 
-    // Calculate the fan angle based solely on the elbow and hand positions
+    // Calculate the angle of forearm rotation based on elbow and hand positions
     float CalculateForearmFanAngle(Transform elbow, Transform hand)
     {
-        // Vector from elbow to hand
+        // Create a vector from elbow to hand and project it onto the horizontal plane
         Vector3 elbowToHand = hand.position - elbow.position;
+        elbowToHand.y = 0; // Flatten to horizontal plane for angle calculation
 
-        // Project the vector onto the horizontal plane by zeroing the y-component
-        elbowToHand.y = 0;
-
-        // Calculate the angle relative to the forward direction (0 degrees)
+        // Determine the angle relative to the forward direction
         float angle;
 
-        // Check if we are calculating for the left or right arm
         if (hand == leftHand)
         {
-            // For left arm, we want the angle to increase anti-clockwise
-            angle = Vector3.SignedAngle(elbowToHand, Vector3.forward, Vector3.up); // Reverse arguments for anti-clockwise
+            // For the left arm, calculate angle anti-clockwise
+            angle = Vector3.SignedAngle(elbowToHand, Vector3.forward, Vector3.up);
         }
         else
         {
-            // For right arm, keep the positive rotation as clockwise
+            // For the right arm, use clockwise direction
             angle = Vector3.SignedAngle(Vector3.forward, elbowToHand, Vector3.up);
         }
 
-        // Normalize angle to 0-360 degrees
-        angle = (angle < 0) ? 360 + angle : angle; // Ensure angle is positive
-        return angle; // Return the absolute value for a consistent positive angle
+        // Convert angle to positive if it is negative
+        return (angle < 0) ? 360 + angle : angle;
     }
 
-
-    // Update UI text and sound based on calculated angle
+    // Update UI and play sounds based on current forearm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
-        // Update text and color
-        if (isLeftArm)
-        {
-            leftForearmAngleText.text = "Left Forearm Rotation: " + currentAngle.ToString("F0") + "°";
-            leftForearmAngleText.color = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
-                ? Color.green
-                : defaultLeftTextColor;
-        }
-        else
-        {
-            rightForearmAngleText.text = "Right Forearm Rotation: " + currentAngle.ToString("F0") + "°";
-            rightForearmAngleText.color = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
-                ? Color.green
-                : defaultRightTextColor;
-        }
-
-        // Play sound every 2 degrees
+        // Only update text and play regular angle sound if angle change meets the threshold
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
-            if (isLeftArm) leftEarAudioSource.PlayOneShot(angleSound);
-            else rightEarAudioSource.PlayOneShot(angleSound);
+            // Display the current angle in the UI text and update the color based on thresholds
+            if (isLeftArm)
+            {
+                // Update left forearm UI text and color based on the angle range
+                leftForearmAngleText.text = "Left Forearm Rotation: " + currentAngle.ToString("F0") + "°";
+                leftForearmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                    ? Color.red
+                    : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
+                        ? Color.green
+                        : defaultLeftTextColor;
 
+                // Play sound in the left ear
+                leftEarAudioSource.PlayOneShot(angleSound);
+            }
+            else
+            {
+                // Update right forearm UI text and color based on the angle range
+                rightForearmAngleText.text = "Right Forearm Rotation: " + currentAngle.ToString("F0") + "°";
+                rightForearmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                    ? Color.red
+                    : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
+                        ? Color.green
+                        : defaultRightTextColor;
+
+                // Play sound in the right ear
+                rightEarAudioSource.PlayOneShot(angleSound);
+            }
+
+            // Update the last recorded angle
             lastAngle = currentAngle;
         }
 
-        // Play specific angle sound within tolerance range
+        // Check if angle is within the specific range for triggering a special sound
         bool isWithinSpecificAngle = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance;
 
+        // Play specific angle sound if entering the threshold range from below
         if (isWithinSpecificAngle)
         {
-            if (isLeftArm && !hasPlayedSpecificSoundLeft)
+            if (isLeftArm && !hasPlayedSpecificSoundLeft && wasBelowThresholdLeft)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundLeft = true;
             }
-            else if (!isLeftArm && !hasPlayedSpecificSoundRight)
+            else if (!isLeftArm && !hasPlayedSpecificSoundRight && wasBelowThresholdRight)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundRight = true;
@@ -152,20 +172,22 @@ public class ForearmRotationExercise : MonoBehaviour
         else
         {
             // Reset flags when moving out of the specific angle range
-            if (isLeftArm) hasPlayedSpecificSoundLeft = false;
-            else hasPlayedSpecificSoundRight = false;
+            if (isLeftArm)
+            {
+                hasPlayedSpecificSoundLeft = false;
+                wasBelowThresholdLeft = currentAngle < specificAngleThreshold - specificAngleTolerance;
+            }
+            else
+            {
+                hasPlayedSpecificSoundRight = false;
+                wasBelowThresholdRight = currentAngle < specificAngleThreshold - specificAngleTolerance;
+            }
         }
     }
 
-    // Toggle exercise activation
-    public void ToggleActivation()
-    {
-        isActivated = !isActivated;
-    }
+    // Toggle activation of the exercise tracking
+    public void ToggleActivation() => isActivated = !isActivated;
 
-    // Select which arm to train
-    public void SetSelectedArm(int armIndex)
-    {
-        selectedArm = (ArmSelection)armIndex;
-    }
+    // Set which arm(s) to train based on input parameter (0 = Both, 1 = Left, 2 = Right)
+    public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
 }
