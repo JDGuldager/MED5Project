@@ -30,6 +30,7 @@ public class ShoulderAngles : MonoBehaviour
     public float anglesoundThreshold = 5f;             // Degrees to trigger the regular angle sound
     public float specificAngleTolerance;               // Tolerance range for triggering specific angle sound
     public float specificAngleThreshold = 90f;         // Angle at which specific sound should play
+    
 
     // Audio sources for stereo and separate ear playback
     public AudioSource stereoAudioSource;              // For both ears
@@ -195,4 +196,11 @@ public class ShoulderAngles : MonoBehaviour
 
     // Sets the selected arm based on a button click (0 = Both, 1 = Left, 2 = Right)
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
+
+    //Sets the exercise angle to a specific float
+    public void SetArmAngle(float specificAngleThreshold) //eller specificAngleTolerance???
+    {
+        specificAngleThreshold = 0;
+    }
+
 }
