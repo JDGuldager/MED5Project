@@ -973,6 +973,52 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &94750098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94750099}
+  - component: {fileID: 94750100}
+  m_Layer: 0
+  m_Name: Rig 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94750099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94750098}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.9945979, y: -1.4999998, z: 0.733596}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2085497301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &94750100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94750098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Effectors: []
 --- !u!1 &97048415
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,8 +1029,6 @@ GameObject:
   m_Component:
   - component: {fileID: 97048417}
   - component: {fileID: 97048416}
-  - component: {fileID: 97048419}
-  - component: {fileID: 97048418}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1004,7 +1048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5ebbd03ccd01e4e886c20b229401f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 1431989040}
+  targetObject: {fileID: 218845913}
   timeToDisableFor: 0.8
 --- !u!4 &97048417
 Transform:
@@ -1021,63 +1065,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &97048418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97048415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbf5731fb1551d64f9175aca7617a976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedArm: 0
-  leftElbow: {fileID: 0}
-  rightElbow: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  leftForearmAngleText: {fileID: 0}
-  rightForearmAngleText: {fileID: 0}
-  angleSound: {fileID: 0}
-  specificAngleSound: {fileID: 0}
-  specificAngleTolerance: 5
-  anglesoundThreshold: 5
-  specificAngleThreshold: 45
-  stereoAudioSource: {fileID: 0}
-  leftEarAudioSource: {fileID: 0}
-  rightEarAudioSource: {fileID: 0}
---- !u!114 &97048419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97048415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03860a419bc01143a27335e6950a2fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedArm: 0
-  leftShoulder: {fileID: 0}
-  rightShoulder: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  leftArmAngleText: {fileID: 0}
-  rightArmAngleText: {fileID: 0}
-  leftShoulderOffset: {x: 0, y: 0, z: 0}
-  rightShoulderOffset: {x: 0, y: 0, z: 0}
-  calibrationOffset: 25
-  angleSound: {fileID: 0}
-  specificAngleSound: {fileID: 0}
-  anglesoundThreshold: 5
-  specificAngleTolerance: 0
-  specificAngleThreshold: 90
-  stereoAudioSource: {fileID: 0}
-  leftEarAudioSource: {fileID: 0}
-  rightEarAudioSource: {fileID: 0}
 --- !u!4 &101628032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 785112355446130244, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
@@ -1786,6 +1773,105 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -900485474811735531, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
   m_PrefabInstance: {fileID: 802818566}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &218845913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 218845915}
+  - component: {fileID: 218845914}
+  m_Layer: 0
+  m_Name: PokeThing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &218845914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218845913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0924bcaa9eb50df458a783ae0e2b59f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 2112952314}
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 1
+  m_DisableVisualsWhenBlockedInGroup: 1
+  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingTargetFilter: {fileID: 0}
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+  m_OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PokeDepth: 0.1
+  m_PokeWidth: 0.0075
+  m_PokeSelectWidth: 0.015
+  m_PokeHoverRadius: 0.015
+  m_PokeInteractionOffset: 0.005
+  m_PhysicsLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_PhysicsTriggerInteraction: 1
+  m_RequirePokeFilter: 1
+  m_EnableUIInteraction: 1
+  m_DebugVisualizationsEnabled: 0
+  m_UIHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_UIHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &218845915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218845913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807542245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223745703
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,7 +4373,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048418}
+      - m_Target: {fileID: 1732536877}
         m_TargetAssemblyTypeName: ForearmRotationExercise, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4
@@ -5035,6 +5121,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6999696850805811548, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.49912235
+      objectReference: {fileID: 0}
+    - target: {fileID: -6999696850805811548, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5010193
+      objectReference: {fileID: 0}
+    - target: {fileID: -6999696850805811548, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5008771
+      objectReference: {fileID: 0}
+    - target: {fileID: -6999696850805811548, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.49897766
+      objectReference: {fileID: 0}
     - target: {fileID: -4618239094308846462, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -5147,6 +5249,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1070498453}
+    - targetCorrespondingSourceObject: {fileID: -6999696850805811548, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 218845915}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
       insertIndex: -1
@@ -5529,7 +5634,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048418}
+      - m_Target: {fileID: 1732536877}
         m_TargetAssemblyTypeName: ForearmRotationExercise, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4
@@ -9315,11 +9420,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -2810793008382437655, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
   m_PrefabInstance: {fileID: 802818566}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1431989040 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4125421792874400280, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
-  m_PrefabInstance: {fileID: 1747547603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1453531201
 GameObject:
   m_ObjectHideFlags: 0
@@ -9487,7 +9587,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048419}
+      - m_Target: {fileID: 1732536875}
         m_TargetAssemblyTypeName: ShoulderAngles, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4
@@ -10352,7 +10452,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048419}
+      - m_Target: {fileID: 1732536875}
         m_TargetAssemblyTypeName: ShoulderAngles, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4
@@ -11490,6 +11590,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2417358720014700305, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417358720014700305, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
       propertyPath: m_AttachTransform
       value: 
       objectReference: {fileID: 0}
@@ -11500,6 +11604,10 @@ PrefabInstance:
     - target: {fileID: 4125421792874400280, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
       propertyPath: m_Name
       value: Poke Interactor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125421792874400280, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -12580,7 +12688,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048419}
+      - m_Target: {fileID: 1732536875}
         m_TargetAssemblyTypeName: ShoulderAngles, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4
@@ -13344,6 +13452,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2085497301}
+  - component: {fileID: 2085497303}
+  - component: {fileID: 2085497302}
   m_Layer: 0
   m_Name: Right Index Finger_target
   m_TagString: Untagged
@@ -13363,9 +13473,47 @@ Transform:
   m_LocalPosition: {x: 2.0545979, y: 1.4999998, z: -0.13559604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 94750099}
   m_Father: {fileID: 720359333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2085497302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085497300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 94750100}
+    m_Active: 1
+  m_Effectors: []
+--- !u!95 &2085497303
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085497300}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &2101184674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3700561098030440501, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
@@ -13712,7 +13860,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 97048418}
+      - m_Target: {fileID: 1732536877}
         m_TargetAssemblyTypeName: ForearmRotationExercise, Assembly-CSharp
         m_MethodName: SetArmAngle
         m_Mode: 4

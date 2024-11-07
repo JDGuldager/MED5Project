@@ -191,8 +191,8 @@ public class ForearmRotationExercise : MonoBehaviour
     // Set which arm(s) to train based on input parameter (0 = Both, 1 = Left, 2 = Right)
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
 
-    public void SetArmAngle(float specificAngleThreshold) //eller specificAngleTolerance???
+    public void SetArmAngle(float userInputValue) //eller specificAngleTolerance???
     {
-        specificAngleThreshold = 0;
+        specificAngleThreshold = userInputValue;
     }
 }
