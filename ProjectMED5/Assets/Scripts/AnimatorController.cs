@@ -32,6 +32,6 @@ public class AnimatorController : MonoBehaviour
     public void LeftArm()
     {
         animator.SetBool("LeftArm", true);
-        animator.SetBool("Right", false);
+        animator.SetBool("RightArm", false);
     }
 }

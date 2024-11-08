@@ -17,16 +17,21 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
 
     public ShoulderAngles shoulderAngles;
     public ForearmRotationExercise ForearmRotationExercise;
+    public GameObject Fys;
+    public ShoulderAngles shoulerAnglesScript;
+    public ForearmRotationExercise forearmScript;
 
     void Start()
     {
         // Store the initial position and rotation
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
+        originalPosition = Fys.transform.position;
+        originalRotation = Fys.transform.rotation;
+
     }
 
     void Update()
     {
+        /*
         // Get the current state information for the base layer (layer 0)
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
@@ -104,13 +109,26 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
         {
             // Reset the flag if we're not in either of the target animation states
             animationEnded = false;
-        }
+        }*/
+    }
+
+    public void ToggleExer1()
+    {
+        shoulerAnglesScript.ToggleActivation();
+        Debug.Log("Toggle");
+    }
+
+    public void ToggleExer2()
+    {
+        forearmScript.ToggleActivation();
+        Debug.Log("Toggle");
     }
 
     private void ResetPosition()
     {
         // Reset the character to the original starting position and rotation
-        transform.position = originalPosition;
-        transform.rotation = originalRotation;
+        Fys.transform.position = originalPosition;
+        Fys.transform.rotation = originalRotation;
+        Debug.Log("Position Reset");
     }
 }

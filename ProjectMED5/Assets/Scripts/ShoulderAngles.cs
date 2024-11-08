@@ -198,7 +198,7 @@ public class ShoulderAngles : MonoBehaviour
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
 
     //Sets the exercise angle to a specific float
-    public void SetArmAngle(float userInputValue) //eller specificAngleTolerance???
+    public void SetArmAngle(float userInputValue) 
     {
         specificAngleThreshold = userInputValue;
     }
