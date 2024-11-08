@@ -8529,8 +8529,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1151052173}
-  firstAnimationName: Exercise 1
-  secondAnimationName: Exercise 2
+  firstAnimationLeftName: LeftArm
+  firstAnimationRightName: RightArm
+  secondAnimationLeftName: LeftArm_001
+  secondAnimationRightName: RightArm_001
   boolExercise1: Exer1
   boolExercise2: Exer2
   finishTriggerName: AnimationFinished

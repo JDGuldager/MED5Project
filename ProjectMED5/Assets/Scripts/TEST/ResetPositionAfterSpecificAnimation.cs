@@ -3,8 +3,10 @@ using UnityEngine;
 public class ResetPositionAfterSpecificAnimations : MonoBehaviour
 {
     public Animator animator;
-    public string firstAnimationName;       // Name of the first animation to check
-    public string secondAnimationName;      // Name of the second animation to check
+    public string firstAnimationLeftName;       // Name of the first animation left to check
+    public string firstAnimationRightName;  // Name of the first animation right to check
+    public string secondAnimationLeftName;      // Name of the second animation to check
+    public string secondAnimationRightName;      // Name of the second animation right to check
     public string boolExercise1;            // Name of the first bool parameter to set to false
     public string boolExercise2;            // Name of the second bool parameter to set to false
     public string finishTriggerName = "AnimationFinished"; // Trigger to set when animation finishes
@@ -31,8 +33,8 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
         // Check if the first or second animation is playing and has finished
         if (stateInfo.normalizedTime >= 1f && !animator.IsInTransition(0))
         {
-            // Check if the first animation has finished
-            if (stateInfo.IsName(firstAnimationName) && !animationEnded)
+            // Check if the first left arm animation has finished
+            if (stateInfo.IsName(firstAnimationLeftName) && !animationEnded)
             {
                 ResetPosition();
                 animationEnded = true;
@@ -47,13 +49,47 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
                 // Set the trigger to indicate the animation is finished
                 animator.SetTrigger(finishTriggerName);
             }
-            // Check if the second animation has finished
-            else if (stateInfo.IsName(secondAnimationName) && !animationEnded)
+            // Check if the first animation right arm has finished
+            else if (stateInfo.IsName(firstAnimationRightName) && !animationEnded)
             {
                 ResetPosition();
                 animationEnded = true;
 
-                // Set the bool parameter for the second exercise to false and trigger forearm rotation activation
+                // Set the bool parameter for the first exercise right arm to false and trigger forearm rotation activation
+                if (!string.IsNullOrEmpty(boolExercise2))
+                {
+                    animator.SetBool(boolExercise2, false);
+                    ForearmRotationExercise.ToggleActivation();
+                }
+
+                // Set the trigger to indicate the animation is finished
+                animator.SetTrigger(finishTriggerName);
+            }
+
+            // Check if the second animation left arm has finished
+            else if (stateInfo.IsName(secondAnimationLeftName) && !animationEnded)
+            {
+                ResetPosition();
+                animationEnded = true;
+
+                // Set the bool parameter for the second exercise left arm to false and trigger forearm rotation activation
+                if (!string.IsNullOrEmpty(boolExercise2))
+                {
+                    animator.SetBool(boolExercise2, false);
+                    ForearmRotationExercise.ToggleActivation();
+                }
+
+                // Set the trigger to indicate the animation is finished
+                animator.SetTrigger(finishTriggerName);
+            }
+
+            // Check if the second animation right arm has finished
+            else if (stateInfo.IsName(secondAnimationRightName) && !animationEnded)
+            {
+                ResetPosition();
+                animationEnded = true;
+
+                // Set the bool parameter for the second exercise right arm to false and trigger forearm rotation activation
                 if (!string.IsNullOrEmpty(boolExercise2))
                 {
                     animator.SetBool(boolExercise2, false);
@@ -64,7 +100,7 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
                 animator.SetTrigger(finishTriggerName);
             }
         }
-        else if (!stateInfo.IsName(firstAnimationName) && !stateInfo.IsName(secondAnimationName))
+        else if (!stateInfo.IsName(firstAnimationLeftName) && !stateInfo.IsName(firstAnimationRightName))
         {
             // Reset the flag if we're not in either of the target animation states
             animationEnded = false;
