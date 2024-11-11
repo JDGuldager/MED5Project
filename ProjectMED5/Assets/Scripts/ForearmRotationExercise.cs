@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR;
 
 public class ForearmRotationExercise : MonoBehaviour
 {
@@ -49,6 +51,9 @@ public class ForearmRotationExercise : MonoBehaviour
     // Activation flag for toggling exercise tracking
     private bool isActivated = false;
 
+    // Controllers for haptic feedback
+    public ActionBasedController leftController; 
+    public ActionBasedController rightController; 
     void Start()
     {
         // Store default text colors to reset them later
@@ -114,7 +119,6 @@ public class ForearmRotationExercise : MonoBehaviour
         return (angle < 0) ? 360 + angle : angle;
     }
 
-    // Update UI and play sounds based on current forearm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
         // Only update text and play regular angle sound if angle change meets the threshold
@@ -125,7 +129,7 @@ public class ForearmRotationExercise : MonoBehaviour
             {
                 // Update left forearm UI text and color based on the angle range
                 leftForearmAngleText.text = "Left Forearm Rotation: " + currentAngle.ToString("F0") + "°";
-                leftForearmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                leftForearmAngleText.color = (currentAngle > specificAngleThreshold + specificAngleTolerance && !(currentAngle >= 340f && currentAngle <= 360f))
                     ? Color.red
                     : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
                         ? Color.green
@@ -138,7 +142,7 @@ public class ForearmRotationExercise : MonoBehaviour
             {
                 // Update right forearm UI text and color based on the angle range
                 rightForearmAngleText.text = "Right Forearm Rotation: " + currentAngle.ToString("F0") + "°";
-                rightForearmAngleText.color = currentAngle > specificAngleThreshold + specificAngleTolerance
+                rightForearmAngleText.color = (currentAngle > specificAngleThreshold + specificAngleTolerance && !(currentAngle >= 340f && currentAngle <= 360f))
                     ? Color.red
                     : Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance
                         ? Color.green
@@ -152,10 +156,9 @@ public class ForearmRotationExercise : MonoBehaviour
             lastAngle = currentAngle;
         }
 
-        // Check if angle is within the specific range for triggering a special sound
+        // Check if the angle is within the specific range to play a specific angle sound
         bool isWithinSpecificAngle = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance;
 
-        // Play specific angle sound if entering the threshold range from below
         if (isWithinSpecificAngle)
         {
             if (isLeftArm && !hasPlayedSpecificSoundLeft && wasBelowThresholdLeft)
@@ -169,9 +172,32 @@ public class ForearmRotationExercise : MonoBehaviour
                 hasPlayedSpecificSoundRight = true;
             }
         }
+
+        // Check if the angle is above the threshold and in the red range, but not between 340-360 degrees
+        bool isInRedRange = currentAngle > specificAngleThreshold + specificAngleTolerance && !(currentAngle >= 340f && currentAngle <= 360f);
+
+        // Trigger vibration if in the red range (excluding 340-360 degrees)
+        if (isInRedRange)
+        {
+            // Calculate the angle difference from the red threshold
+            float angleAboveRed = currentAngle - (specificAngleThreshold + specificAngleTolerance);
+
+            // Calculate vibration intensity (min intensity 0.1, max intensity 1.0 at 10 degrees above the red threshold)
+            float vibrationIntensity = Mathf.Clamp01(Mathf.Lerp(0.1f, 1f, Mathf.InverseLerp(0f, 10f, angleAboveRed)));
+
+            // Apply vibration based on the current angle
+            if (isLeftArm)
+            {
+                leftController.SendHapticImpulse(vibrationIntensity, 0.2f); // 0.2f is the duration of the vibration
+            }
+            else
+            {
+                rightController.SendHapticImpulse(vibrationIntensity, 0.2f);
+            }
+        }
         else
         {
-            // Reset flags when moving out of the specific angle range
+            // Reset flags when moving out of the red range
             if (isLeftArm)
             {
                 hasPlayedSpecificSoundLeft = false;
@@ -182,8 +208,20 @@ public class ForearmRotationExercise : MonoBehaviour
                 hasPlayedSpecificSoundRight = false;
                 wasBelowThresholdRight = currentAngle < specificAngleThreshold - specificAngleTolerance;
             }
+
+            // Stop vibration when the user is out of the red range
+            if (isLeftArm)
+            {
+                leftController.SendHapticImpulse(0, 0); // Stop vibration when out of range
+            }
+            else
+            {
+                rightController.SendHapticImpulse(0, 0); // Stop vibration when out of range
+            }
         }
     }
+
+
 
     // Toggle activation of the exercise tracking
     public void ToggleActivation() => isActivated = !isActivated;

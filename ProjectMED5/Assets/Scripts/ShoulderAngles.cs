@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShoulderAngles : MonoBehaviour
 {
@@ -55,6 +56,10 @@ public class ShoulderAngles : MonoBehaviour
 
     // Flag to activate/deactivate shoulder angle tracking
     private bool isActivated = false;
+
+    // Controllers for haptic feedback
+    public ActionBasedController leftController;
+    public ActionBasedController rightController;
 
     void Start()
     {
@@ -121,7 +126,7 @@ public class ShoulderAngles : MonoBehaviour
         return Mathf.Clamp(angle - calibrationOffset, 0, 180);
     }
 
-    // Updates the UI text and plays sounds based on the current arm angle
+    // Updates the UI text, plays sounds, and triggers vibrations based on the current arm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
         // Only update text and play sound if the angle has changed by the threshold amount
@@ -157,38 +162,62 @@ public class ShoulderAngles : MonoBehaviour
             lastAngle = currentAngle;
         }
 
-        // Check if the arm is within the specific angle range and play specific sound if entering from below
+        // Play the specific angle sound only if within tolerance and entering the range from below
         bool isWithinSpecificAngle = Mathf.Abs(currentAngle - specificAngleThreshold) <= specificAngleTolerance;
 
-        // Play the specific angle sound only if the arm has entered the range from below
         if (isWithinSpecificAngle)
         {
             if (isLeftArm && !hasPlayedSpecificSoundLeft && wasBelowThresholdLeft)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
-                hasPlayedSpecificSoundLeft = true;  // Prevent repeated plays
+                hasPlayedSpecificSoundLeft = true;
             }
             else if (!isLeftArm && !hasPlayedSpecificSoundRight && wasBelowThresholdRight)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
-                hasPlayedSpecificSoundRight = true;  // Prevent repeated plays
+                hasPlayedSpecificSoundRight = true;
+            }
+        }
+
+        // Check if the angle is above the threshold for triggering the red range vibration
+        bool isInRedRange = currentAngle > specificAngleThreshold + specificAngleTolerance;
+
+        if (isInRedRange)
+        {
+            // Calculate the angle difference from the red threshold
+            float angleAboveRed = currentAngle - (specificAngleThreshold + specificAngleTolerance);
+
+            // Calculate vibration intensity (min intensity 0.1, max intensity 1.0 at 10 degrees above the red threshold)
+            float vibrationIntensity = Mathf.Clamp01(Mathf.Lerp(0.1f, 1f, Mathf.InverseLerp(0f, 10f, angleAboveRed)));
+
+            // Apply vibration based on the current angle
+            if (isLeftArm)
+            {
+                leftController.SendHapticImpulse(vibrationIntensity, 0.2f); // 0.2f is the duration of the vibration
+            }
+            else
+            {
+                rightController.SendHapticImpulse(vibrationIntensity, 0.2f);
             }
         }
         else
         {
-            // Reset flags and update threshold tracking based on current position
+            // Reset flags and stop vibration when moving out of the red range
             if (isLeftArm)
             {
                 hasPlayedSpecificSoundLeft = false;
                 wasBelowThresholdLeft = currentAngle < specificAngleThreshold - specificAngleTolerance;
+                leftController.SendHapticImpulse(0, 0); // Stop vibration
             }
             else
             {
                 hasPlayedSpecificSoundRight = false;
                 wasBelowThresholdRight = currentAngle < specificAngleThreshold - specificAngleTolerance;
+                rightController.SendHapticImpulse(0, 0); // Stop vibration
             }
         }
     }
+
 
 
     // Toggles the activation of the angle tracking
