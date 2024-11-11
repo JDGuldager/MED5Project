@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 218845913}
   timeToDisableFor: 0.8
+  endExerciseBuffer: 10
   vibrationIntensity: 0.4
   vibrationDuration: 0.1
   leftController: {fileID: 494601285}
@@ -6309,10 +6310,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2065952700}
   m_HandleRect: {fileID: 1406315492}
   m_Direction: 0
-  m_MinValue: 45
-  m_MaxValue: 90
+  m_MinValue: 0
+  m_MaxValue: 9
   m_WholeNumbers: 1
-  m_Value: 45
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6623,6 +6624,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 97048416}
+        m_TargetAssemblyTypeName: ToggleObject, Assembly-CSharp
+        m_MethodName: ToggleEndExercise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7813,10 +7826,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 144598362}
   m_HandleRect: {fileID: 2112507766}
   m_Direction: 0
-  m_MinValue: 45
-  m_MaxValue: 90
+  m_MinValue: 0
+  m_MaxValue: 9
   m_WholeNumbers: 1
-  m_Value: 45
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9430,6 +9443,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 97048416}
+        m_TargetAssemblyTypeName: ToggleObject, Assembly-CSharp
+        m_MethodName: ToggleEndExercise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &904952699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10371,6 +10396,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 97048416}
+        m_TargetAssemblyTypeName: ToggleObject, Assembly-CSharp
+        m_MethodName: ToggleEndExercise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13023,10 +13060,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1451965336}
   m_HandleRect: {fileID: 995866061}
   m_Direction: 0
-  m_MinValue: 45
-  m_MaxValue: 90
+  m_MinValue: 0
+  m_MaxValue: 9
   m_WholeNumbers: 1
-  m_Value: 45
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13958,10 +13995,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 988045570}
   m_HandleRect: {fileID: 1242712580}
   m_Direction: 0
-  m_MinValue: 45
-  m_MaxValue: 90
+  m_MinValue: 0
+  m_MaxValue: 9
   m_WholeNumbers: 1
-  m_Value: 45
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -17575,7 +17612,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3909fab70b8ee564d8582aa5c1560846, type: 3}
       insertIndex: 0
       addedObject: {fileID: 987480462}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3909fab70b8ee564d8582aa5c1560846, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1686385574}
   m_SourcePrefab: {fileID: 100100000, guid: 3909fab70b8ee564d8582aa5c1560846, type: 3}
 --- !u!1 &1576793275
 GameObject:
@@ -17748,6 +17788,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 97048416}
+        m_TargetAssemblyTypeName: ToggleObject, Assembly-CSharp
+        m_MethodName: ToggleEndExercise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18777,6 +18829,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3038996308705141167, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
   m_PrefabInstance: {fileID: 802818566}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1686385573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3909fab70b8ee564d8582aa5c1560846, type: 3}
+  m_PrefabInstance: {fileID: 1575493277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1686385574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686385573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfa4b37eb23b1b43b58275a075ed792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleSlider1: {fileID: 1141131190}
+  shoulderScript: {fileID: 1732536875}
+  angleText1: {fileID: 1932152287}
+  angleSlider2: {fileID: 583585611}
+  forearmScript: {fileID: 1732536877}
+  angleText2: {fileID: 1114128653}
 --- !u!4 &1691087715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8051031947758251219, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
@@ -21961,7 +22036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2046986340
 Transform:
   m_ObjectHideFlags: 0

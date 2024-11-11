@@ -13,6 +13,9 @@ public class ExerciseAngle : MonoBehaviour
     public ForearmRotationExercise forearmScript;
     public TMPro.TextMeshProUGUI angleText2;
 
+    private int a = 5;
+    private int b = 45;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +25,11 @@ public class ExerciseAngle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shoulderScript.specificAngleThreshold = angleSlider1.value;
-        angleText1.text = "Exercise Angle: " + angleSlider1.value;
+        shoulderScript.specificAngleThreshold = angleSlider1.value * a + b;
+        angleText1.text = "Exercise Angle: " + shoulderScript.specificAngleThreshold;
 
-        forearmScript.specificAngleThreshold = angleSlider2.value;
-        angleText2.text = "Exercise Angle: " + angleSlider2.value;
+        forearmScript.specificAngleThreshold = angleSlider2.value * a + b;
+        angleText2.text = "Exercise Angle: " + forearmScript.specificAngleThreshold;
     }
   
 

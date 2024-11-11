@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ResetPositionAfterSpecificAnimations : MonoBehaviour
 {
@@ -11,8 +13,8 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
     public string boolExercise2;            // Name of the second bool parameter to set to false
     public string finishTriggerName = "AnimationFinished"; // Trigger to set when animation finishes
 
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
+    private Vector3 originalPosition = new Vector3(2.69f, 0f, 2.02f);
+    private Quaternion originalRotation = Quaternion.Euler(0,-88.644f,0);
     private bool animationEnded = false;
 
     public ShoulderAngles shoulderAngles;
@@ -116,6 +118,7 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
     {
         shoulerAnglesScript.ToggleActivation();
         Debug.Log("Toggle");
+
     }
 
     public void ToggleExer2()
@@ -126,6 +129,7 @@ public class ResetPositionAfterSpecificAnimations : MonoBehaviour
 
     private void ResetPosition()
     {
+        Fys = GameObject.Find("PhysioTherapist");
         // Reset the character to the original starting position and rotation
         Fys.transform.position = originalPosition;
         Fys.transform.rotation = originalRotation;
