@@ -1451,6 +1451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 218845913}
+  endExercise1: {fileID: 153153907}
+  endExercise2: {fileID: 1388095295}
   timeToDisableFor: 0.8
   endExerciseBuffer: 10
   vibrationIntensity: 0.4
