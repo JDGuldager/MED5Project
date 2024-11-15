@@ -19,6 +19,7 @@ public class ForearmRotationExercise : MonoBehaviour
     // UI text elements to display forearm rotation angles
     public TMPro.TextMeshProUGUI leftForearmAngleText;
     public TMPro.TextMeshProUGUI rightForearmAngleText;
+    public TMPro.TextMeshProUGUI repetetionsText;
 
     // Audio clips for regular angle sound and specific angle sound
     public AudioClip angleSound;
@@ -35,6 +36,10 @@ public class ForearmRotationExercise : MonoBehaviour
     // Track the last known angles to detect significant angle changes
     private float lastLeftAngle = 0f;
     private float lastRightAngle = 0f;
+
+    // Repetetions
+    public int repetetionsCompletet = 0;
+    public int repetetionAmount = 0;
 
     // Flags to ensure specific angle sound is only played once per range entry
     private bool hasPlayedSpecificSoundLeft = false;
@@ -53,7 +58,13 @@ public class ForearmRotationExercise : MonoBehaviour
 
     // Controllers for haptic feedback
     public ActionBasedController leftController; 
-    public ActionBasedController rightController; 
+    public ActionBasedController rightController;
+
+    // Gameobjects 
+    public GameObject endExerciseButton;
+    public GameObject exercisesButton;
+    public GameObject exercisesReturnButton;
+
     void Start()
     {
         // Store default text colors to reset them later
@@ -72,12 +83,14 @@ public class ForearmRotationExercise : MonoBehaviour
         {
             leftForearmAngleText.gameObject.SetActive(false);
             rightForearmAngleText.gameObject.SetActive(false);
+            repetetionsText.gameObject.SetActive(false);
             return;
         }
 
         // Show or hide UI text based on selected arm for training
         leftForearmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both);
         rightForearmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both);
+        repetetionsText.gameObject.SetActive(selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Left);
 
         // Process left arm if selected
         if (selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both)
@@ -91,6 +104,12 @@ public class ForearmRotationExercise : MonoBehaviour
         {
             float rightForearmAngle = CalculateForearmFanAngle(rightElbow, rightHand);
             UpdateUIAndPlaySound(rightForearmAngle, ref lastRightAngle, false);
+        }
+
+        if(repetetionsCompletet == repetetionAmount)
+        {
+            ToggleActivation();
+            EndExercise();
         }
     }
 
@@ -121,6 +140,7 @@ public class ForearmRotationExercise : MonoBehaviour
 
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
+        repetetionsText.text = "Repetetions: " + repetetionsCompletet + " / "+ repetetionAmount;
         // Only update text and play regular angle sound if angle change meets the threshold
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
@@ -165,11 +185,13 @@ public class ForearmRotationExercise : MonoBehaviour
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundLeft = true;
+                repetetionsCompletet++;
             }
             else if (!isLeftArm && !hasPlayedSpecificSoundRight && wasBelowThresholdRight)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundRight = true;
+                repetetionsCompletet++;
             }
         }
 
@@ -224,7 +246,11 @@ public class ForearmRotationExercise : MonoBehaviour
 
 
     // Toggle activation of the exercise tracking
-    public void ToggleActivation() => isActivated = !isActivated;
+    public void ToggleActivation()
+    {
+        repetetionsCompletet = 0;
+        isActivated = !isActivated;
+    }
 
     // Set which arm(s) to train based on input parameter (0 = Both, 1 = Left, 2 = Right)
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
@@ -232,5 +258,15 @@ public class ForearmRotationExercise : MonoBehaviour
     public void SetArmAngle(float userInputValue) 
     {
         specificAngleThreshold = userInputValue;
+    }
+    public void SetRepetetions(int repetetionAmountChosen)
+    {
+        repetetionAmount = repetetionAmountChosen;
+    }
+    public void EndExercise()
+    {
+        endExerciseButton.SetActive(false);
+        exercisesButton.SetActive(true);
+        exercisesReturnButton.SetActive(true);
     }
 }
