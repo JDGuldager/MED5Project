@@ -263,6 +263,15 @@ public class ForearmRotationExercise : MonoBehaviour
     {
         repetetionAmount = repetetionAmountChosen;
     }
+
+    public void RepsUp()
+    {
+        repetetionAmount++;
+    }
+    public void RepsDown()
+    {
+        repetetionAmount--;
+    }
     public void EndExercise()
     {
         endExerciseButton.SetActive(false);
