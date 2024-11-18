@@ -17,6 +17,7 @@ public class ShoulderAngles : MonoBehaviour
     // UI text elements to display arm elevation angles
     public TMPro.TextMeshProUGUI leftArmAngleText;
     public TMPro.TextMeshProUGUI rightArmAngleText;
+    public TMPro.TextMeshProUGUI repetetionsText;
 
     // Offset values to fine-tune shoulder position (if needed)
     public Vector3 leftShoulderOffset = Vector3.zero;
@@ -42,6 +43,10 @@ public class ShoulderAngles : MonoBehaviour
     private float lastLeftAngle = 0f;
     private float lastRightAngle = 0f;
 
+    // Repetetions
+    public int repetetionsCompletet = 0;
+    public int repetetionAmount = 0;
+
     // Flags to prevent specific angle sound from playing repeatedly
     private bool hasPlayedSpecificSoundLeft = false;
     private bool hasPlayedSpecificSoundRight = false;
@@ -60,6 +65,11 @@ public class ShoulderAngles : MonoBehaviour
     // Controllers for haptic feedback
     public ActionBasedController leftController;
     public ActionBasedController rightController;
+
+    // Gameobjects 
+    public GameObject endExerciseButton;
+    public GameObject exercisesButton;
+    public GameObject exercisesReturnButton;
 
     void Start()
     {
@@ -85,6 +95,7 @@ public class ShoulderAngles : MonoBehaviour
         {
             leftArmAngleText.gameObject.SetActive(false);
             rightArmAngleText.gameObject.SetActive(false);
+            repetetionsText.gameObject.SetActive(false);
             return;
         }
 
@@ -104,6 +115,11 @@ public class ShoulderAngles : MonoBehaviour
         {
             float rightArmAngle = CalculateArmElevation(rightShoulder, rightHand, rightShoulderOffset);
             UpdateUIAndPlaySound(rightArmAngle, ref lastRightAngle, false);
+        }
+        if (repetetionsCompletet == repetetionAmount)
+        {
+            ToggleActivation();
+            EndExercise();
         }
     }
 
@@ -129,6 +145,7 @@ public class ShoulderAngles : MonoBehaviour
     // Updates the UI text, plays sounds, and triggers vibrations based on the current arm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
+        repetetionsText.text = "Repetetions: " + repetetionsCompletet + " / " + repetetionAmount;
         // Only update text and play sound if the angle has changed by the threshold amount
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
@@ -171,11 +188,13 @@ public class ShoulderAngles : MonoBehaviour
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundLeft = true;
+                repetetionsCompletet++;
             }
             else if (!isLeftArm && !hasPlayedSpecificSoundRight && wasBelowThresholdRight)
             {
                 stereoAudioSource.PlayOneShot(specificAngleSound);
                 hasPlayedSpecificSoundRight = true;
+                repetetionsCompletet++;
             }
         }
 
@@ -221,7 +240,11 @@ public class ShoulderAngles : MonoBehaviour
 
 
     // Toggles the activation of the angle tracking
-    public void ToggleActivation() => isActivated = !isActivated;
+    public void ToggleActivation()
+    {
+        repetetionsCompletet = 0;
+        isActivated = !isActivated;
+    }
 
     // Sets the selected arm based on a button click (0 = Both, 1 = Left, 2 = Right)
     public void SetSelectedArm(int armIndex) => selectedArm = (ArmSelection)armIndex;
@@ -231,5 +254,23 @@ public class ShoulderAngles : MonoBehaviour
     {
         specificAngleThreshold = userInputValue;
     }
+    public void SetRepetetions(int repetetionAmountChosen)
+    {
+        repetetionAmount = repetetionAmountChosen;
+    }
 
+    public void RepsUp()
+    {
+        repetetionAmount++;
+    }
+    public void RepsDown()
+    {
+        repetetionAmount--;
+    }
+    public void EndExercise()
+    {
+        endExerciseButton.SetActive(false);
+        exercisesButton.SetActive(true);
+        exercisesReturnButton.SetActive(true);
+    }
 }

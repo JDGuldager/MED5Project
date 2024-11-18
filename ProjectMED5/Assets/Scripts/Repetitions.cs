@@ -20,7 +20,7 @@ public class Repetitions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        repsText1.text = "Repetitions: ";
+        repsText1.text = "Repetitions: " + ShoulderScript.repetetionAmount;
         repsText2.text = "Repetitions: " + forearmScript.repetetionAmount;
     }
 
