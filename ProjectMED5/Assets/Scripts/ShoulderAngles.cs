@@ -86,6 +86,7 @@ public class ShoulderAngles : MonoBehaviour
         // Initially hide the UI text for arm angles
         leftArmAngleText.gameObject.SetActive(false);
         rightArmAngleText.gameObject.SetActive(false);
+        repetetionsText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -98,7 +99,10 @@ public class ShoulderAngles : MonoBehaviour
             repetetionsText.gameObject.SetActive(false);
             return;
         }
-
+        else
+        {
+            repetetionsText.gameObject.SetActive(true);
+        }
         // Show only the relevant arm text based on the selected arm for training
         leftArmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Left || selectedArm == ArmSelection.Both);
         rightArmAngleText.gameObject.SetActive(selectedArm == ArmSelection.Right || selectedArm == ArmSelection.Both);
@@ -145,7 +149,7 @@ public class ShoulderAngles : MonoBehaviour
     // Updates the UI text, plays sounds, and triggers vibrations based on the current arm angle
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
-        repetetionsText.text = "Repetetions: " + repetetionsCompletet + " / " + repetetionAmount;
+        repetetionsText.text = repetetionsCompletet + " / " + repetetionAmount;
         // Only update text and play sound if the angle has changed by the threshold amount
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {

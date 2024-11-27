@@ -140,7 +140,7 @@ public class ForearmRotationExercise : MonoBehaviour
 
     void UpdateUIAndPlaySound(float currentAngle, ref float lastAngle, bool isLeftArm)
     {
-        repetetionsText.text = "Repetetions: " + repetetionsCompletet + " / "+ repetetionAmount;
+        repetetionsText.text = repetetionsCompletet + " / "+ repetetionAmount;
         // Only update text and play regular angle sound if angle change meets the threshold
         if (Mathf.Abs(currentAngle - lastAngle) >= anglesoundThreshold)
         {
