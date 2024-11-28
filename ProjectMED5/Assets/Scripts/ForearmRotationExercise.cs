@@ -6,6 +6,7 @@ using UnityEngine.XR;
 
 public class ForearmRotationExercise : MonoBehaviour
 {
+    public CharacterDialogue CharacterDialogue;
     // Enum to select which arm(s) to train
     public enum ArmSelection { Both, Left, Right }
     public ArmSelection selectedArm = ArmSelection.Both; // Default to training both arms
@@ -21,13 +22,14 @@ public class ForearmRotationExercise : MonoBehaviour
     public TMPro.TextMeshProUGUI rightForearmAngleText;
     public TMPro.TextMeshProUGUI repetetionsText;
 
-    // Audio clips for regular angle sound and specific angle sound
-    public AudioClip angleSound;
-    public AudioClip specificAngleSound;
     public float specificAngleTolerance = 5f; // Range around target angle for specific sound
     public float anglesoundThreshold = 5f;    // Angle change threshold to play regular sound
     public float specificAngleThreshold = 45f; // Target angle for specific angle sound
 
+    // Audio clips for regular angle sound and specific angle sound
+    public AudioClip angleSound;
+    public AudioClip specificAngleSound;
+    public AudioClip exerciseCompleted;
     // Audio sources for stereo and ear-specific playback
     public AudioSource stereoAudioSource;
     public AudioSource leftEarAudioSource;
@@ -110,6 +112,7 @@ public class ForearmRotationExercise : MonoBehaviour
         {
             ToggleActivation();
             EndExercise();
+            CharacterDialogue.PlayDialogue(exerciseCompleted);
         }
     }
 

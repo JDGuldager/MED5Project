@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 17567023}
   - component: {fileID: 17567022}
   - component: {fileID: 17567021}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RepsShoulderAngles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1261,7 @@ Transform:
   m_GameObject: {fileID: 88125236}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.59, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1306,7 +1306,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 87
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1ec19f5a8bffb3d4b9c4051c8ac3759d, type: 2}
   m_TargetDisplay: 0
@@ -2488,8 +2488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5f1706d26d3c64dbc4b3941573e0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueDelay: 999
-  startupDialogueClip: {fileID: 8300000, guid: c111c114723395d4192549c39f089fc6, type: 3}
+  startupDialogueClip: {fileID: 8300000, guid: 4713954d451402d4fbf7794f4a568661, type: 3}
+  walkTutorial: {fileID: 1939667600}
+  rotateTutorial: {fileID: 1036255151}
 --- !u!82 &155919718
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2511,9 +2512,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 1000
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -4562,7 +4563,7 @@ GameObject:
   - component: {fileID: 420434392}
   - component: {fileID: 420434394}
   - component: {fileID: 420434393}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RepsForearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5791,13 +5792,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535010173}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5509729, y: 0.034634355, z: 0.06786822, w: 0.83103746}
+  m_LocalRotation: {x: 0.539034, y: 0.0336604, z: 0.06835649, w: 0.8388306}
   m_LocalPosition: {x: -0.027, y: 2.938, z: 0.175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186432657}
-  m_LocalEulerAnglesHint: {x: 65.652, y: 18.725, z: 21.48}
+  m_LocalEulerAnglesHint: {x: 64.121, y: 17.35, z: 20.235}
 --- !u!108 &535010175
 Light:
   m_ObjectHideFlags: 0
@@ -5810,7 +5811,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.19
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7421,7 +7422,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691884568}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 4285044ee90609041b52ae8239c98f61, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: f9b2ca788b609e2478697a9e2f46d81e, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -9921,7 +9922,7 @@ MonoBehaviour:
         m_MethodName: PlayDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 0a6eae65932601a4b8ec7434ea0abc4b, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 1d4b9eba66c928042846da75e47cd941, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -10882,7 +10883,7 @@ MonoBehaviour:
         m_MethodName: PlayDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 5f49dc4f463b87841a4c6ddee90e2cd2, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 12d8f5235e5e70f45a1175a92c2cfbc7, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -10998,7 +10999,7 @@ GameObject:
   - component: {fileID: 970043477}
   - component: {fileID: 970043479}
   - component: {fileID: 970043478}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Right (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15296,7 +15297,7 @@ GameObject:
   - component: {fileID: 1379956856}
   - component: {fileID: 1379956858}
   - component: {fileID: 1379956857}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Left (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18727,7 +18728,7 @@ GameObject:
   - component: {fileID: 1610529535}
   - component: {fileID: 1610529536}
   - component: {fileID: 1610529537}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19719,13 +19720,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729585222}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7953116, y: 0.055174667, z: 0.05254893, w: 0.60139316}
+  m_LocalRotation: {x: 0.8678039, y: 0.061634485, z: 0.044797592, w: 0.49103045}
   m_LocalPosition: {x: -0.027, y: 2.938, z: 0.175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186432657}
-  m_LocalEulerAnglesHint: {x: 71.951, y: 151.055, z: 150.84}
+  m_LocalEulerAnglesHint: {x: 57.856, y: 164.936, z: 163.516}
 --- !u!108 &1729585224
 Light:
   m_ObjectHideFlags: 0
@@ -19738,7 +19739,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.86
+  m_Intensity: 0.6
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -20212,6 +20213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03860a419bc01143a27335e6950a2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterDialogue: {fileID: 155919717}
   selectedArm: 0
   leftShoulder: {fileID: 63455650}
   rightShoulder: {fileID: 1682261315}
@@ -20223,11 +20225,12 @@ MonoBehaviour:
   leftShoulderOffset: {x: -0.15, y: 0, z: 0.15}
   rightShoulderOffset: {x: 0.15, y: 0, z: 0.15}
   calibrationOffset: 0
-  angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
-  specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
   anglesoundThreshold: 5
   specificAngleTolerance: 4
   specificAngleThreshold: 90
+  angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
+  specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
+  exerciseCompleted: {fileID: 8300000, guid: 1f16822e918cf4e46bb795489591018f, type: 3}
   stereoAudioSource: {fileID: 1732536876}
   leftEarAudioSource: {fileID: 909140778}
   rightEarAudioSource: {fileID: 1070498452}
@@ -20346,6 +20349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf5731fb1551d64f9175aca7617a976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterDialogue: {fileID: 155919717}
   selectedArm: 0
   leftElbow: {fileID: 1887128109}
   rightElbow: {fileID: 218449210}
@@ -20354,11 +20358,12 @@ MonoBehaviour:
   leftForearmAngleText: {fileID: 1610529537}
   rightForearmAngleText: {fileID: 1989881101}
   repetetionsText: {fileID: 420434393}
-  angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
-  specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
   specificAngleTolerance: 4
   anglesoundThreshold: 5
   specificAngleThreshold: 60
+  angleSound: {fileID: 8300000, guid: 621fe150b77ef2c418a3d16ef3782840, type: 3}
+  specificAngleSound: {fileID: 8300000, guid: f0325cc3612285b4aa66395afb58efe0, type: 3}
+  exerciseCompleted: {fileID: 8300000, guid: 1f16822e918cf4e46bb795489591018f, type: 3}
   stereoAudioSource: {fileID: 1732536876}
   leftEarAudioSource: {fileID: 909140778}
   rightEarAudioSource: {fileID: 1070498452}
@@ -22452,7 +22457,7 @@ GameObject:
   - component: {fileID: 1989881103}
   - component: {fileID: 1989881102}
   - component: {fileID: 1989881101}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

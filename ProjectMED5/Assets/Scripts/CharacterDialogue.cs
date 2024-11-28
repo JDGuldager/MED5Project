@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class CharacterDialogue : MonoBehaviour
 {
-    // Public float to control the delay before the character speaks at the start
-    public float dialogueDelay = 3f;
-
     // Audio clip to play at the beginning of the game
     public AudioClip startupDialogueClip;
 
     // Reference to the AudioSource component
     private AudioSource audioSource;
+
+    public GameObject walkTutorial;
+    public GameObject rotateTutorial;
+
+    private int count = 0;
 
     void Start()
     {
@@ -23,22 +25,16 @@ public class CharacterDialogue : MonoBehaviour
             Debug.LogError("No AudioSource found! Please attach an AudioSource component.");
             return;
         }
-
-        // Play the startup dialogue after a delay if a clip is assigned
-        if (startupDialogueClip != null)
-        {
-            StartCoroutine(StartDialogueAfterDelay(startupDialogueClip));
-        }
     }
-
-    // Coroutine to wait and then play the audio with a delay
-    private IEnumerator StartDialogueAfterDelay(AudioClip clip)
+    private void Update()
     {
-        // Wait for the specified number of seconds
-        yield return new WaitForSeconds(dialogueDelay);
-
-        // Play the dialogue audio if a clip was provided
-        PlayDialogue(clip);
+        // Play if there is a clip and the user has completet both tutorials for moving
+        if (startupDialogueClip != null && !walkTutorial.activeSelf && !rotateTutorial.activeSelf && count == 0)
+        {
+            count++;
+            Debug.Log("Play Clip");
+            PlayDialogue(startupDialogueClip);
+        }
     }
 
     // Public method to play the specified audio clip on demand (for OnClick events)

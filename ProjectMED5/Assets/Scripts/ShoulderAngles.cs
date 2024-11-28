@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShoulderAngles : MonoBehaviour
 {
+    public CharacterDialogue CharacterDialogue;
+
     public enum ArmSelection { Both, Left, Right }
     public ArmSelection selectedArm = ArmSelection.Both; // Default to training both arms
 
@@ -26,14 +28,14 @@ public class ShoulderAngles : MonoBehaviour
     // Calibration offset to set baseline 0° at rest and 180° when fully raised
     public float calibrationOffset = 25f;
 
-    // Audio clips for angle sound and specific angle threshold sound
-    public AudioClip angleSound;
-    public AudioClip specificAngleSound;
     public float anglesoundThreshold = 5f;             // Degrees to trigger the regular angle sound
     public float specificAngleTolerance;               // Tolerance range for triggering specific angle sound
     public float specificAngleThreshold = 90f;         // Angle at which specific sound should play
-    
 
+    // Audio clips for angle sound and specific angle threshold sound
+    public AudioClip angleSound;
+    public AudioClip specificAngleSound;
+    public AudioClip exerciseCompleted;
     // Audio sources for stereo and separate ear playback
     public AudioSource stereoAudioSource;              // For both ears
     public AudioSource leftEarAudioSource;             // For left ear
@@ -124,6 +126,8 @@ public class ShoulderAngles : MonoBehaviour
         {
             ToggleActivation();
             EndExercise();
+            CharacterDialogue.PlayDialogue(exerciseCompleted);
+
         }
     }
 
