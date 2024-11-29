@@ -29,7 +29,7 @@ public class ToggleObject : MonoBehaviour
     {
         // Start the coroutine to toggle the visibility
         StartCoroutine(DisableTemporarily(timeToDisableFor));
-        TriggerVibration(rightController);  // Example: Vibrate left controller
+        TriggerVibration(rightController);  // Vibrate controller
     }
     public void ToggleEndExercise(int exerciseNR)
     {
@@ -42,7 +42,7 @@ public class ToggleObject : MonoBehaviour
         // Disable the GameObject
         targetObject.SetActive(false);
 
-        // Wait for 0.5 seconds
+        // Wait for time amount of seconds
         yield return new WaitForSeconds(time);
 
         // Re-enable the GameObject
@@ -61,12 +61,10 @@ public class ToggleObject : MonoBehaviour
         text.SetActive(false);
         if (exerciseNR == 1) 
         {
-            Debug.Log("Ending Ex 1");
             endExercise1.SetActive(true);
         }
         if (exerciseNR == 2)
         {
-            Debug.Log("Ending Ex 2");
             endExercise2.SetActive(true);
         }
     }
