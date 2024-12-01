@@ -14565,6 +14565,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7910852b433b6e843927b8157b7c9711, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1151052174}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7910852b433b6e843927b8157b7c9711, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1151052175}
   m_SourcePrefab: {fileID: 100100000, guid: 7910852b433b6e843927b8157b7c9711, type: 3}
 --- !u!95 &1151052173 stripped
 Animator:
@@ -14596,6 +14599,20 @@ MonoBehaviour:
   Fys: {fileID: 155919714}
   shoulerAnglesScript: {fileID: 1732536875}
   forearmScript: {fileID: 1732536877}
+--- !u!114 &1151052175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155919714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4adc2f37233b46d8b4d40629b39c4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFootAudio: {fileID: 0}
+  rightFootAudio: {fileID: 0}
 --- !u!1 &1161191437
 GameObject:
   m_ObjectHideFlags: 0
