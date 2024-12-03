@@ -27,6 +27,8 @@ public class ToggleObject : MonoBehaviour
     // Function to be called on an OnClick event
     public void ToggleVisibility()
     {
+        // test
+        targetObject.SetActive(false);
         // Start the coroutine to toggle the visibility
         StartCoroutine(DisableTemporarily(timeToDisableFor));
         TriggerVibration(rightController);  // Vibrate controller
@@ -40,7 +42,7 @@ public class ToggleObject : MonoBehaviour
     private IEnumerator DisableTemporarily(float time)
     {
         // Disable the GameObject
-        targetObject.SetActive(false);
+        // targetObject.SetActive(false);
 
         // Wait for time amount of seconds
         yield return new WaitForSeconds(time);

@@ -47,7 +47,7 @@ public class ShoulderAngles : MonoBehaviour
 
     // Repetetions
     public int repetetionsCompletet = 0;
-    public int repetetionAmount = 0;
+    [Range(0f, 20f)] public int repetetionAmount = 0;
 
     // Flags to prevent specific angle sound from playing repeatedly
     private bool hasPlayedSpecificSoundLeft = false;

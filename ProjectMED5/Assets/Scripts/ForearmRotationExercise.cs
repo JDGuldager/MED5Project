@@ -41,7 +41,7 @@ public class ForearmRotationExercise : MonoBehaviour
 
     // Repetetions
     public int repetetionsCompletet = 0;
-    public int repetetionAmount = 0;
+    [Range(0f, 20f)] public int repetetionAmount = 0;
 
     // Flags to ensure specific angle sound is only played once per range entry
     private bool hasPlayedSpecificSoundLeft = false;
