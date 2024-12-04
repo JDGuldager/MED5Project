@@ -8939,6 +8939,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1116640570}
     m_Modifications:
+    - target: {fileID: 5866666021909216657, guid: b24054303e8ee5548ac44ec83c732dff, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1720c98616a0f194dae551fe7645b49b, type: 2}
+    - target: {fileID: 5866666021909216657, guid: b24054303e8ee5548ac44ec83c732dff, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06
@@ -9107,14 +9115,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: b24054303e8ee5548ac44ec83c732dff, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1720c98616a0f194dae551fe7645b49b, type: 2}
-    - target: {fileID: 5866666021909216657, guid: b24054303e8ee5548ac44ec83c732dff, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 202898346079500020, guid: c9da4ffc6335ac4499988095584adbab, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -9187,7 +9187,114 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1732536880}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1732536881}
+    - targetCorrespondingSourceObject: {fileID: -463223583131065138, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 802818568}
   m_SourcePrefab: {fileID: 100100000, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+--- !u!1 &802818567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -463223583131065138, guid: c21cb553669ef544bb04d2eefd9302f9, type: 3}
+  m_PrefabInstance: {fileID: 802818566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &802818568
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802818567}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.4
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &803843739
 GameObject:
   m_ObjectHideFlags: 0
@@ -21192,12 +21299,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig2:RightForeArm'\n\tTransform 'mixamorig2:RightHand'\n\tTransform
-    'mixamorig2:RightArm'\n\tTransform 'mixamorig2:LeftHand'\n\tTransform 'mixamorig2:Neck'\n\tTransform
-    'mixamorig2:LeftArm'\n\tTransform 'mixamorig2:Head'\n\tTransform 'mixamorig2:LeftForeArm'\n\tTransform
-    'mixamorig2:RightForeArm'\n\tTransform 'mixamorig2:RightHand'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -21453,6 +21555,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1732536881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732536866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4adc2f37233b46d8b4d40629b39c4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFootAudio: {fileID: 8300000, guid: 91a7ac052b6d0467786dc56d96b81ad9, type: 3}
+  rightFootAudio: {fileID: 8300000, guid: b68b62a30292449b0b0b612b363f124d, type: 3}
+  audioSource: {fileID: 802818568}
 --- !u!1 &1740428581
 GameObject:
   m_ObjectHideFlags: 0
