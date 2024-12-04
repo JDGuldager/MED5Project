@@ -5,38 +5,44 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShoulderAngles : MonoBehaviour
 {
+    [Header("Other Scripts")]
     public CharacterDialogue CharacterDialogue;
 
     public enum ArmSelection { Both, Left, Right }
+    [Header("Selected Arm")]
     public ArmSelection selectedArm = ArmSelection.Both; // Default to training both arms
 
     // Transforms for shoulders and hands
+    [Header("Transforms")]
     public Transform leftShoulder;
     public Transform rightShoulder;
     public Transform leftHand;
     public Transform rightHand;
 
     // UI text elements to display arm elevation angles
+    [Header("Text")]
     public TMPro.TextMeshProUGUI leftArmAngleText;
     public TMPro.TextMeshProUGUI rightArmAngleText;
     public TMPro.TextMeshProUGUI repetetionsText;
 
+    // Calibration offset to set baseline 0° at rest and 180° when fully raised
+    [Header("Offsets")]
     // Offset values to fine-tune shoulder position (if needed)
     public Vector3 leftShoulderOffset = Vector3.zero;
     public Vector3 rightShoulderOffset = Vector3.zero;
-
-    // Calibration offset to set baseline 0° at rest and 180° when fully raised
     public float calibrationOffset = 25f;
-
     public float anglesoundThreshold = 5f;             // Degrees to trigger the regular angle sound
     public float specificAngleTolerance;               // Tolerance range for triggering specific angle sound
     public float specificAngleThreshold = 90f;         // Angle at which specific sound should play
 
     // Audio clips for angle sound and specific angle threshold sound
+    [Header("Sound Clips")]
     public AudioClip angleSound;
     public AudioClip specificAngleSound;
     public AudioClip exerciseCompleted;
+
     // Audio sources for stereo and separate ear playback
+    [Header("Audio Sources")]
     public AudioSource stereoAudioSource;              // For both ears
     public AudioSource leftEarAudioSource;             // For left ear
     public AudioSource rightEarAudioSource;            // For right ear
@@ -45,9 +51,11 @@ public class ShoulderAngles : MonoBehaviour
     private float lastLeftAngle = 0f;
     private float lastRightAngle = 0f;
 
-    // Repetetions
+    [Header("Repetetions")]
     public int repetetionsCompletet = 0;
-    [Range(0f, 20f)] public int repetetionAmount = 0;
+    public int repetetionAmount = 10;
+    public int minReps = 1;
+    public int maxReps = 20;
 
     // Flags to prevent specific angle sound from playing repeatedly
     private bool hasPlayedSpecificSoundLeft = false;
@@ -64,11 +72,11 @@ public class ShoulderAngles : MonoBehaviour
     // Flag to activate/deactivate shoulder angle tracking
     private bool isActivated = false;
 
-    // Controllers for haptic feedback
+    [Header("Controllers")]
     public ActionBasedController leftController;
     public ActionBasedController rightController;
 
-    // Gameobjects 
+    [Header("GameObjects")]
     public GameObject endExerciseButton;
     public GameObject exercisesButton;
     public GameObject exercisesReturnButton;
@@ -269,11 +277,13 @@ public class ShoulderAngles : MonoBehaviour
 
     public void RepsUp()
     {
-        repetetionAmount++;
+        // Make sure the user doesn't go bellow 1 rep or above 20
+        repetetionAmount = Mathf.Clamp(repetetionAmount + 1, minReps, maxReps);
     }
     public void RepsDown()
     {
-        repetetionAmount--;
+        // Make sure the user doesn't go bellow 1 rep or above 20
+        repetetionAmount = Mathf.Clamp(repetetionAmount - 1, minReps, maxReps);
     }
     public void EndExercise()
     {

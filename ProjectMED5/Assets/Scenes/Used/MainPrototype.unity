@@ -21192,12 +21192,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig2:RightForeArm'\n\tTransform 'mixamorig2:RightHand'\n\tTransform
-    'mixamorig2:RightArm'\n\tTransform 'mixamorig2:LeftHand'\n\tTransform 'mixamorig2:Neck'\n\tTransform
-    'mixamorig2:LeftArm'\n\tTransform 'mixamorig2:Head'\n\tTransform 'mixamorig2:LeftForeArm'\n\tTransform
-    'mixamorig2:RightForeArm'\n\tTransform 'mixamorig2:RightHand'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -21254,6 +21249,8 @@ MonoBehaviour:
   rightEarAudioSource: {fileID: 1070498452}
   repetetionsCompletet: 0
   repetetionAmount: 10
+  minReps: 1
+  maxReps: 20
   leftController: {fileID: 494601285}
   rightController: {fileID: 957674033}
   endExerciseButton: {fileID: 877126119}
@@ -21387,6 +21384,8 @@ MonoBehaviour:
   rightEarAudioSource: {fileID: 1070498452}
   repetetionsCompletet: 0
   repetetionAmount: 10
+  minReps: 1
+  maxReps: 20
   leftController: {fileID: 494601285}
   rightController: {fileID: 957674033}
   endExerciseButton: {fileID: 129089093}
@@ -21426,33 +21425,29 @@ MonoBehaviour:
   repsText1: {fileID: 2036338722}
   forearmScript: {fileID: 1732536877}
   repsText2: {fileID: 1274951120}
---- !u!54 &1732536880
-Rigidbody:
+--- !u!136 &1732536880
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732536866}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &1740428581
 GameObject:
   m_ObjectHideFlags: 0
@@ -21482,7 +21477,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.07
   m_Pitch: 1
   Loop: 0
   Mute: 0

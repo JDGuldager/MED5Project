@@ -6,31 +6,39 @@ using UnityEngine.XR;
 
 public class ForearmRotationExercise : MonoBehaviour
 {
+    [Header("Other Scripts")]
     public CharacterDialogue CharacterDialogue;
     // Enum to select which arm(s) to train
     public enum ArmSelection { Both, Left, Right }
+    [Header("Selected Arm")]
     public ArmSelection selectedArm = ArmSelection.Both; // Default to training both arms
 
     // Transform references for elbow and hand positions
+    [Header("Transforms")]
     public Transform leftElbow;
     public Transform rightElbow;
     public Transform leftHand;
     public Transform rightHand;
 
     // UI text elements to display forearm rotation angles
+    [Header("Text")]
     public TMPro.TextMeshProUGUI leftForearmAngleText;
     public TMPro.TextMeshProUGUI rightForearmAngleText;
     public TMPro.TextMeshProUGUI repetetionsText;
 
+    [Header("Offsets")]
     public float specificAngleTolerance = 5f; // Range around target angle for specific sound
     public float anglesoundThreshold = 5f;    // Angle change threshold to play regular sound
     public float specificAngleThreshold = 45f; // Target angle for specific angle sound
 
     // Audio clips for regular angle sound and specific angle sound
+    [Header("Sound Clips")]
     public AudioClip angleSound;
     public AudioClip specificAngleSound;
     public AudioClip exerciseCompleted;
+
     // Audio sources for stereo and ear-specific playback
+    [Header("Audio Sources")]
     public AudioSource stereoAudioSource;
     public AudioSource leftEarAudioSource;
     public AudioSource rightEarAudioSource;
@@ -40,8 +48,11 @@ public class ForearmRotationExercise : MonoBehaviour
     private float lastRightAngle = 0f;
 
     // Repetetions
+    [Header("Repetetions")]
     public int repetetionsCompletet = 0;
-    [Range(0f, 20f)] public int repetetionAmount = 0;
+    public int repetetionAmount = 10;
+    public int minReps = 1;
+    public int maxReps = 20;
 
     // Flags to ensure specific angle sound is only played once per range entry
     private bool hasPlayedSpecificSoundLeft = false;
@@ -59,10 +70,12 @@ public class ForearmRotationExercise : MonoBehaviour
     private bool isActivated = false;
 
     // Controllers for haptic feedback
+    [Header("Controllers")]
     public ActionBasedController leftController; 
     public ActionBasedController rightController;
 
     // Gameobjects 
+    [Header("GameObjects")]
     public GameObject endExerciseButton;
     public GameObject exercisesButton;
     public GameObject exercisesReturnButton;
@@ -269,11 +282,13 @@ public class ForearmRotationExercise : MonoBehaviour
 
     public void RepsUp()
     {
-        repetetionAmount++;
+        // Make sure the user doesn't go bellow minReps rep or above maxReps
+        repetetionAmount = Mathf.Clamp(repetetionAmount + 1, minReps, maxReps);
     }
     public void RepsDown()
     {
-        repetetionAmount--;
+        // Make sure the user doesn't go bellow 1 rep or above 20
+        repetetionAmount = Mathf.Clamp(repetetionAmount - 1, minReps, maxReps);
     }
     public void EndExercise()
     {
