@@ -2143,9 +2143,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11f7598bd23d814bbb4306d73921f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  leftController: {fileID: 494601285}
+  actionLeft:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Action Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 25922cc0-61de-49ae-8650-9aaf7c4209ef
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  forward: 0
+  sideways: 0
   rigidBody: {fileID: 119754327}
   animator: {fileID: 1732536873}
+  stick: {x: 0, y: 0}
 --- !u!1 &129089093
 GameObject:
   m_ObjectHideFlags: 0
@@ -14793,7 +14808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7910852b433b6e843927b8157b7c9711, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7910852b433b6e843927b8157b7c9711, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21619,7 +21634,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.07
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
